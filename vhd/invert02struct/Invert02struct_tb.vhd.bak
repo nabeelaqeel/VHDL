@@ -1,0 +1,47 @@
+--name : MUHAMMAD NABEEL AQEEL BIN MOHAMMAD NASSER
+--matrix number : 22002071/2 
+
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity Invert02struct_tb is
+end entity Invert02struct_tb;
+
+architecture Behavioral of Invert02struct_tb is
+
+    component Invert02struct
+        port (
+            a  : in  std_logic_vector(3 downto 0);
+            y  : out std_logic_vector(3 downto 0);
+            c  : out std_logic_vector(3 downto 0)
+        );
+    end component;
+
+    signal a_tb : std_logic_vector(3 downto 0);
+    signal y_tb : std_logic_vector(3 downto 0);
+    signal c_tb : std_logic_vector(3 downto 0);
+
+    begin
+
+    DUT: Invert02struct port map (
+        a => a_tb,
+        y => y_tb,
+        c => c_tb
+    );
+
+    -- Testbench stimulus process
+    process
+    begin
+        -- Apply input patterns
+        for i in 0 to 15 loop
+            a_tb <= std_logic_vector(to_unsigned(i, 4));
+            wait for 10 ns;
+        end loop;
+
+        -- Wait for simulation to complete
+        wait;
+    end process;
+
+end architecture Behavioral;
